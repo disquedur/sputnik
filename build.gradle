@@ -164,6 +164,12 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    testLogging{
+        afterSuite { desc, result ->
+            def passedTests = result.testCount - result.failedTestCount - result.skippedTestCount
+            println "Total tests passed iiii: $passedTests"
+        }
+    }
 }
 
 // Jacoco + coveralls
@@ -177,6 +183,8 @@ jacocoTestReport {
 java {
     withJavadocJar()
     withSourcesJar()
+    sourceCompatibility(JavaVersion.VERSION_15)
+    targetCompatibility(JavaVersion.VERSION_15)
 }
 
 shadowJar {
